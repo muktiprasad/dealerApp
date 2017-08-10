@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateComponent }   from './create.component';
-import { SearchComponent }     from './search.component';
 import { PageNotFoundComponent }     from './not.found.component';
 @Component({
   selector: 'my-app',
