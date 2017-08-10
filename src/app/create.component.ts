@@ -26,7 +26,16 @@ import { Component } from '@angular/core';
     <br><br>
     <button>Submit</button>
   </form>
-    
+   <div class="form-group">
+        <div class="col-xs-8">
+            <div [hidden]="!submitted">
+                Submitted Data : {{data}}
+            </div>
+            <div [hidden]="submitted">
+                
+            </div>
+        </div>
+    </div>  
 </div>
                `
 })
