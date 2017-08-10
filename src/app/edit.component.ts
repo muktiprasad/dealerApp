@@ -1,25 +1,25 @@
 import { Component } from '@angular/core';
+import {columnPipe,rowPipe,searchPipe} from './pipe';
 
 export class Car {
-  id: number;
-  make: string;
-  model: string;
-  price: number;
-  year: number;
-  color: string;
+  carId: number;
+  carMake: string;
+  carModel: string;
+  carPrice: number;
+  carYear: number;
+  carColor: string;
 }
 
-const CARS: Car[] = [
-  { id: 11, 'make': 'Honda','model':'Accord',price:14000,year:2013,color:'Metalic Grey' },
-  { id: 12, 'make': 'Nissan','model':'Altima',price:15000,year:2017,color:'blue' },
-  { id: 13, 'make': 'Honda','model':'Accord',price:12000,year:2012,color:'red' },
-  { id: 14, 'make': 'nissan','model':'Sentra',price:12000,year:2012,color:'red' },
-  { id: 15, 'make': 'Ford','model':'focus',price:20000,year:2012,color:'grey' },
-  { id: 16, 'make': 'Hyundai','model':'elentra',price:16000,year:2017,color:'white' },
-  { id: 17, 'make': 'Honda','model':'Civic',price:18000,year:2013,color:'blue' }
+public const CARS: Car[] = [
+  { carId: '11', 'carMake': 'Honda','carModel':'Accord',carPrice:'14000',carYear:'2013',carColor:'Metalic Grey' },
+  { carId: '12', 'carMake': 'Nissan','carModel':'Altima',carPrice:'15000',carYear:'2017',carColor:'blue' },
+  { carId: '13', 'carMake': 'Honda','carModel':'Accord',carPrice:'12000',carYear:'2012',carColor:'red' },
+  { carId: '14', 'carMake': 'nissan','carModel':'Sentra',carPrice:'12000',carYear:'2012',carColor:'red' },
+  { carId: '15', 'carMake': 'Ford','carModel':'focus',carPrice:'20000',carYear:'2012',carColor:'grey' },
+  { carId: '16', 'carMake': 'Hyundai','carModel':'elentra',carPrice:'16000',carYear:'2017',carColor:'white' }
   
- 
 ];
+
 
 @Component({
   selector: 'my-app',
@@ -29,42 +29,43 @@ const CARS: Car[] = [
       <li *ngFor="let car of cars"
         [class.selected]="car === selectedCar"
         (click)="onSelect(car)">
-        <span class="badge">{{car.id}}</span> {{car.make}}
+        <span class="badge">{{car.carId}}</span> {{car.carMake}}
       </li>
     </ul>
     
     <div *ngIf="selectedCar">
-      <h2>{{selectedCar.make}} details!</h2>
-      <div><label>Id: </label>{{selectedCar.id}}</div>
+      <h2>{{selectedCar.carMake}} details!</h2>
+      <div><label>Id: </label>{{selectedCar.carId}}</div>
       <div>
         <label>Make: </label>
-        <input [(ngModel)]="selectedCar.make" placeholder="make"/>
+        <input [(ngModel)]="selectedCar.carMake" placeholder="make"/>
       </div>
       <div>
         <label>Model: </label>
-        <input [(ngModel)]="selectedCar.model" placeholder="model"/>
+        <input [(ngModel)]="selectedCar.carModel" placeholder="model"/>
       </div>
       
       <div>
         <label>Price: </label>
-        <input [(ngModel)]="selectedCar.price" placeholder="price"/>
+        <input [(ngModel)]="selectedCar.carPrice" placeholder="price"/>
       </div>
       <div>
         <label>Year: </label>
-        <input [(ngModel)]="selectedCar.year" placeholder="year"/>
+        <input [(ngModel)]="selectedCar.carYear" placeholder="year"/>
       </div>
       <div>
         <label>Color: </label>
-        <input [(ngModel)]="selectedCar.color" placeholder="color"/>
+        <input [(ngModel)]="selectedCar.carColor" placeholder="color"/>
       </div>
     </div>
     
     <h2>Search a Car</h2>
-    <input [(ngModel)]="query"><br/><br/>
+    <input type="text" #searchFilter (keyup)="0" /><br/><br/>
      <table class="table">
 <tr><th>Id</th><th>Make</th><th>Model</th><th>Price</th><th>Year</th><th>Color</th></tr>
-<tr *ngFor="let car of cars"><td>{{car.id}}</td><td>{{car.make}}</td><td>{{car.model}}</td><td>{{car.price}}</td><td>{{car.year}}</td><td>{{car.color}}</td></tr>
-
+ <tr *ngFor="let row of cars | searchPipe : searchFilter.value">
+    <td *ngFor="let rowValues of row | rowPipe">{{ rowValues }}</td>
+  </tr>
 </table>
   `,
   styles: [`
@@ -126,6 +127,8 @@ export class EditComponent {
   onSelect(car: Car): void {
     this.selectedCar = car;
   }
+  
+  CARS.push(localStorage.getItem('carArray'));
 }
 
 
