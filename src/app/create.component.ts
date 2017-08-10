@@ -5,27 +5,28 @@ import { Component } from '@angular/core';
     selector: 'create-app',
     template: `
                 <h1>Form</h1>
-                <div>
-  <form (ngSubmit)="onSubmit(carForm.value)" #carForm="ngForm" novalidate>
-    <div>Id:<br>
+                <div class="container formDiv">
+  <form class="form-horizontal" (ngSubmit)="onSubmit(carForm.value)" #carForm="ngForm" novalidate>
+    <div class="form-group"><label for="Id">Id</label><br>
     <input type="number" [(ngModel)]="user.carId" name="carId"
     ><br></div>
-   <div> Make:<br/>
+   <div class="form-group"><label for="make">Make</label><br/>
     <input type="text" [(ngModel)]="user.carMake"
     name="carMake"></div>
-   <div> Model:<br>
+   <div class="form-group"><label for="model">Model</label><br>
     <input type="text" [(ngModel)]="user.carModel"
     name="carModel"></div>
-    <div>Price:<br>
+    <div class="form-group"><label for="price">Price</label><br>
     <input type="number" [(ngModel)]="user.carPrice" name="carPrice"></div>
-    <div>Year:<br>
+    <div class="form-group"><label for="year">Year</label><br>
     <input type="text" [(ngModel)]="user.carYear" name="carYear" ></div>
-    <div>Color:<br>
+    <div class="form-group"><label for="color">Color</label><br>
     <input type="text" [(ngModel)]="user.carColor"
     name="carColor"></div>
     <br><br>
     <button>Submit</button>
   </form>
+  
    <div class="form-group">
         <div class="col-xs-8">
             <div [hidden]="!submitted">
@@ -37,7 +38,8 @@ import { Component } from '@angular/core';
         </div>
     </div>  
 </div>
-               `
+               `,
+styles: ['.formDiv{margin: 20px;}']
 })
 export class CreateComponent {
  public user ={
