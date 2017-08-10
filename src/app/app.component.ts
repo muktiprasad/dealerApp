@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateComponent }   from './create.component';
 import { PageNotFoundComponent }     from './not.found.component';
+import {columnPipe,rowPipe,searchPipe} from './pipe';
 @Component({
   selector: 'my-app',
   template: `<h1>{{name}}</h1>
